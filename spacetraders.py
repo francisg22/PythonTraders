@@ -143,8 +143,41 @@ class ship(setup):
         r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/mounts/remove',data = {"symbol": mount}, headers = {'Authorization':'Bearer {}'.format(self.key)})
         return r.json()
     
+class contracts(ship):
+    def listConracts(self):
+        r = requests.get('https://api.spacetraders.io/v2/my/contracts', headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def getConract(self,contract):
+        r = requests.get('https://api.spacetraders.io/v2/my/contracts' + contract, headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def acceptContract(self,contract):
+        r = requests.post('https://api.spacetraders.io/v2/my/contracts' + contract + '/accept', headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def deliverCargo(self,contract,ship,cargo,amount):
+        r = requests.post('https://api.spacetraders.io/v2/my/contracts' + contract + '/deliver', data = {"shipSymbol": ship, "tradeSymbol": cargo, "units": amount}, headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def fufillContract(self,contract):
+        r = requests.post('https://api.spacetraders.io/v2/my/contracts' + contract + '/fulfill', headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+class account(contracts):
+    def listFactions():
+        r = requests.get('https://api.spacetraders.io/v2/factions')
+        return r.json()
+    def getFaction(self,faction):
+        r = requests.get('https://api.spacetraders.io/v2/factions/'+ faction, headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def getPubAgent(agent):
+        r = requests.get('https://api.spacetraders.io/v2/agents/' + agent)
+        return r.json()
+    def listAgents():
+        r = requests.get('https://api.spacetraders.io/v2/agents')
+        return r.json()
     
-        
+
+
+    
+    
+    
     
     
     
