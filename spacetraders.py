@@ -57,6 +57,101 @@ class ship(setup):
     def shipLoc(shipNum,sList):
         lst = sList
         return [lst['data'][shipNum]['nav']['systemSymbol'],lst['data'][shipNum]['nav']['waypointSymbol']]
+    def buyShip(self,shipname, loc):
+        link = 'https://api.spacetraders.io/v2/my/ship'
+        r = requests.post(link, data={"shipType": shipname, "waypointSymbol": loc}, headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def getShip(self, name):
+        r = requests.get('https://api.spacetraders.io/v2/my/ships/'+name, headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def getCargo(self, name):
+        r = requests.get('https://api.spacetraders.io/v2/my/ships/'+name+'/cargo', headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def orbit(self,name):
+        r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/orbit', headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def refine(self,name,mats):
+        r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/refine', data={'produce':mats}, headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def chart(self,name):
+        r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/chart', headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def getCooldown(self,name):
+        r = requests.get('https://api.spacetraders.io/v2/my/ships/'+name+'/cooldown', headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def dock(self,name):
+        r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/dock', headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def survey(self,name):
+        r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/survey', headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def extractResource(self,name,survey):
+        r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/extract', data = {survey}, headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def extractResource(self,name,survey):
+        r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/extract/survey', data = {survey}, headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def jettison(self,name,cargo):
+        r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/jettison', data = {cargo}, headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def jump(self,name,sys):
+        r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/jump', data = {"systemSymbol": sys}, headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def navigate(self,name,loc):
+        r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/nativage', data = {"waypointSymbol": loc}, headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def shipNav(self, name, navType):
+        r = requests.patch('https://api.spacetraders.io/v2/my/ships/'+name+'/nav', data = {"flightMode": navType}, headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def getNav(self,name):
+        r = requests.get('https://api.spacetraders.io/v2/my/ships/'+name+'/nav', headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def warp(self, name, loc):
+        r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/warp', data = {"waypointSymbol": loc}, headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def sellCargo(self,name, cargo, amount):
+        r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/sell', data = {"symbol": cargo, "units": amount}, headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def scanSystems(self,name):
+        r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/scan/systems', headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def scanWaypoints(self,name):
+        r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/scan/waypoints', headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def scanShips(self,name):
+        r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/scan/ships', headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def refuel(self,name, amount):
+        r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/refuel', data = {"units": amount}, headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def buyCargo(self,name, cargo, amount):
+        r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/purchase', data = {"symbol": cargo, "units": amount}, headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def buyCargo(self,name, ship, cargo, amount):
+        r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/transfer', data = {"tradeSymbol": cargo, "units": amount,"shipSymbol": ship}, headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def negotiate(self,name):
+        r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/negotiate/contract', headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def getMounts(self,name):
+        r = requests.get('https://api.spacetraders.io/v2/my/ships/'+name+'/mounts', headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def installMounts(self,name,mount):
+        r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/mounts/install',data = {"symbol": mount}, headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    def removeMounts(self,name,mount):
+        r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/mounts/remove',data = {"symbol": mount}, headers = {'Authorization':'Bearer {}'.format(self.key)})
+        return r.json()
+    
+    
+        
+    
+    
+    
+    
+    
+    
+    
     
 class systems:
     #if readme is used - remember to put loc is [system,waypoint]
