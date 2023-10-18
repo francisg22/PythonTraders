@@ -78,7 +78,7 @@ class ship(setup):
         return r.json()
     def getCooldown(self,name):
         r = requests.get('https://api.spacetraders.io/v2/my/ships/'+name+'/cooldown', headers = {'Authorization':'Bearer {}'.format(self.key)})
-        return r.json()
+        return r.text
     def dock(self,name):
         r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/dock', headers = {'Authorization':'Bearer {}'.format(self.key)})
         return r.json()
@@ -98,7 +98,7 @@ class ship(setup):
         r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/jump', data = {"systemSymbol": sys}, headers = {'Authorization':'Bearer {}'.format(self.key)})
         return r.json()
     def navigate(self,name,loc):
-        r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/nativage', data = {"waypointSymbol": loc}, headers = {'Authorization':'Bearer {}'.format(self.key)})
+        r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/navigate', data = {"waypointSymbol": loc}, headers = {'Authorization':'Bearer {}'.format(self.key)})
         return r.json()
     def shipNav(self, name, navType):
         r = requests.patch('https://api.spacetraders.io/v2/my/ships/'+name+'/nav', data = {"flightMode": navType}, headers = {'Authorization':'Bearer {}'.format(self.key)})
@@ -127,7 +127,7 @@ class ship(setup):
     def buyCargo(self,name, cargo, amount):
         r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/purchase', data = {"symbol": cargo, "units": amount}, headers = {'Authorization':'Bearer {}'.format(self.key)})
         return r.json()
-    def buyCargo(self,name, ship, cargo, amount):
+    def tranferCargo(self,name, ship, cargo, amount):
         r = requests.post('https://api.spacetraders.io/v2/my/ships/'+name+'/transfer', data = {"tradeSymbol": cargo, "units": amount,"shipSymbol": ship}, headers = {'Authorization':'Bearer {}'.format(self.key)})
         return r.json()
     def negotiate(self,name):
@@ -148,16 +148,16 @@ class contracts(ship):
         r = requests.get('https://api.spacetraders.io/v2/my/contracts', headers = {'Authorization':'Bearer {}'.format(self.key)})
         return r.json()
     def getConract(self,contract):
-        r = requests.get('https://api.spacetraders.io/v2/my/contracts' + contract, headers = {'Authorization':'Bearer {}'.format(self.key)})
+        r = requests.get('https://api.spacetraders.io/v2/my/contracts/' + contract, headers = {'Authorization':'Bearer {}'.format(self.key)})
         return r.json()
     def acceptContract(self,contract):
-        r = requests.post('https://api.spacetraders.io/v2/my/contracts' + contract + '/accept', headers = {'Authorization':'Bearer {}'.format(self.key)})
+        r = requests.post('https://api.spacetraders.io/v2/my/contracts/' + contract + '/accept', headers = {'Authorization':'Bearer {}'.format(self.key)})
         return r.json()
     def deliverCargo(self,contract,ship,cargo,amount):
-        r = requests.post('https://api.spacetraders.io/v2/my/contracts' + contract + '/deliver', data = {"shipSymbol": ship, "tradeSymbol": cargo, "units": amount}, headers = {'Authorization':'Bearer {}'.format(self.key)})
+        r = requests.post('https://api.spacetraders.io/v2/my/contracts/' + contract + '/deliver', data = {"shipSymbol": ship, "tradeSymbol": cargo, "units": amount}, headers = {'Authorization':'Bearer {}'.format(self.key)})
         return r.json()
     def fufillContract(self,contract):
-        r = requests.post('https://api.spacetraders.io/v2/my/contracts' + contract + '/fulfill', headers = {'Authorization':'Bearer {}'.format(self.key)})
+        r = requests.post('https://api.spacetraders.io/v2/my/contracts/' + contract + '/fulfill', headers = {'Authorization':'Bearer {}'.format(self.key)})
         return r.json()
 class account(contracts):
     def listFactions():
