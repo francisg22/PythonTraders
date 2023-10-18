@@ -144,7 +144,7 @@ class ship(setup):
         return r.json()
     
 class contracts(ship):
-    def listConracts(self):
+    def listContracts(self):
         r = requests.get('https://api.spacetraders.io/v2/my/contracts', headers = {'Authorization':'Bearer {}'.format(self.key)})
         return r.json()
     def getConract(self,contract):

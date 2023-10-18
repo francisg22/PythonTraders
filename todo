@@ -1,5 +1,5 @@
-1. Contracts - view and accept them
-2. Ships - view and purchase them - maybe in the same class move them
-    Have to move, dock, orbit, sell?, view cargo, change flightmode, view waypoints, start extracting matierials, and other actions that come with contracts
-3. Market - be able to view market and sell goods
-4. 
+1. Create a gui using tkinter
+2. Connect button presses to all of the api calls 
+3, handle errors thrown by different api calls 
+4. ????
+5. profit
