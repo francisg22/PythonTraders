@@ -54,9 +54,9 @@ class ship(setup):
     def shipList(self):
         r = requests.get('https://api.spacetraders.io/v2/my/ships', headers ={ 'Authorization':'Bearer {}'.format(self.key)})
         return r.json()
-    def shipLoc(shipNum,sList):
-        lst = sList
-        return [lst['data'][shipNum]['nav']['systemSymbol'],lst['data'][shipNum]['nav']['waypointSymbol']]
+    # def shipLoc(shipNum,sList):
+    #     lst = sList
+    #     return [lst['data'][shipNum]['nav']['systemSymbol'],lst['data'][shipNum]['nav']['waypointSymbol']]
     def buyShip(self,shipname, loc):
         link = 'https://api.spacetraders.io/v2/my/ship'
         r = requests.post(link, data={"shipType": shipname, "waypointSymbol": loc}, headers = {'Authorization':'Bearer {}'.format(self.key)})
